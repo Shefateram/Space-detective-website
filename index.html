@@ -1,1 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Space Detective | Little Space Adventures</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* =========================
+   GENERAL DESIGN
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background:
+        radial-gradient(circle at 10% 10%, #f8d2f7, transparent 28%),
+        radial-gradient(circle at 90% 20%, #E9E1F7, transparent 30%),
+        #FFF8F0;
+
+    font-family: 'Nunito', sans-serif;
+    color: #665568;
+    line-height: 1.7;
+}
+
+h1, h2, h3 {
+    line-height: 1.3;
+}
+
+section {
+    scroll-margin-top: 90px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 7%;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(255, 248, 240, 0.95);
+
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 3px 15px rgba(100, 70, 100, 0.08);
+}
+
+.logo {
+    color: #9876A8;
+    font-size: 24px;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.nav-area {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-area a {
+    color: #786C75;
+    text-decoration: none;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.nav-area a:hover {
+    color: #B47A99;
+}
+
+
+/* =========================
+   WELCOME SECTION
+========================= */
+
+.welcome-sec {
+    text-align: center;
+    padding: 110px 20px 130px;
+    position: relative;
+    overflow: hidden;
+}
+
+.subtittle {
+    color: #9B789E;
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.welcome-sec h1 {
+    color: #9876A8;
+    font-size: clamp(38px, 6vw, 65px);
+    margin: 20px 0;
+}
+
+.welcome-sec h1::before {
+    content: "✦";
+    color: #E5A8C7;
+    font-size: 30px;
+    margin-right: 12px;
+}
+
+.intro {
+    color: #988492;
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+.explore-btn {
+    display: inline-block;
+    background: #b991a5;
+    color: white;
+    padding: 15px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 900;
+    transition: 0.3s;
+
+    box-shadow: 0 5px 15px rgba(185, 145, 165, 0.3);
+}
+
+.explore-btn:hover {
+    background: #D9A6C5;
+    transform: translateY(-4px);
+}
+
+
+/* =========================
+   FLOATING DECORATIONS
+========================= */
+
+.space-decoration {
+    position: absolute;
+    top: 120px;
+    right: 10%;
+    font-size: 120px;
+
+    animation: float 3s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+.space-decoration .star {
+    position: absolute;
+    color: #D9A6C5;
+    font-size: 22px;
+
+    animation: twinkle 2s infinite alternate;
+}
+
+.space-decoration .star:nth-child(2) {
+    top: 10px;
+    left: -35px;
+}
+
+.space-decoration .star:nth-child(3) {
+    top: 65px;
+    right: -25px;
+}
+
+.space-decoration .star:nth-child(4) {
+    bottom: -15px;
+    left: 25px;
+}
+
+@keyframes float {
+
+    0%, 100% {
+        transform: translateY(0) rotate(-15deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(-15deg);
+    }
+
+}
+
+@keyframes twinkle {
+
+    from {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+}
+
+
+/* =========================
+   GENERAL SECTION DESIGN
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1150px;
+    margin: auto;
+}
+
+.section-heading {
+    text-align: center;
+    color: #9876A8;
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.section-description {
+    text-align: center;
+    color: #988492;
+    font-size: 17px;
+    margin-bottom: 45px;
+}
+
+
+/* =========================
+   INVESTIGATION CARDS
+========================= */
+
+#missions {
+    padding: 80px 0;
+}
+
+.case-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
+
+    gap: 30px;
+}
+
+.case-card {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(100, 70, 100, 0.10);
+
+    transition: 0.3s;
+
+    border: 2px solid #F1E3F1;
+}
+
+.case-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 15px 30px rgba(100, 70, 100, 0.15);
+}
+
+.case-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.case-image-placeholder {
+    height: 220px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 100px;
+}
+
+.case-content {
+    padding: 25px;
+}
+
+.case-number {
+    color: #B47A99;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.case-card h3 {
+    color: #9876A8;
+    font-size: 23px;
+    margin: 10px 0;
+}
+
+.case-card p {
+    color: #988492;
+    margin-bottom: 20px;
+}
+
+.case-link {
+    display: inline-block;
+
+    background: #B991A5;
+    color: white;
+
+    padding: 11px 23px;
+    border-radius: 25px;
+
+    text-decoration: none;
+    font-weight: 800;
+
+    transition: 0.3s;
+}
+
+.case-link:hover {
+    background: #9876A8;
+}
+
+
+/* =========================
+   STORY SECTIONS
+========================= */
+
+.story-section {
+    padding: 85px 0;
+}
+
+#ingenuity {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#insight {
+    background:
+        radial-gradient(circle at 90% 10%, rgba(190, 117, 92, 0.12), transparent 35%),
+        #FFF7F1;
+}
+
+#spirit-opportunity {
+    background:
+        radial-gradient(circle at 10% 20%, rgba(190, 140, 100, 0.12), transparent 35%),
+        #F9F2EC;
+}
+
+.story-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.story-label {
+    display: inline-block;
+
+    background: #E9D9EC;
+    color: #9876A8;
+
+    padding: 7px 20px;
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+.story-header h2 {
+    color: #9876A8;
+    font-size: clamp(30px, 5vw, 42px);
+    margin-bottom: 15px;
+}
+
+.story-meta {
+    color: #A38D9E;
+    font-weight: 700;
+}
+
+
+/* =========================
+   STORY IMAGES
+========================= */
+
+.story-visual {
+    max-width: 850px;
+    margin: 0 auto 45px;
+
+    background: white;
+    padding: 12px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 10px 30px rgba(100, 70, 70, 0.13);
+
+    overflow: hidden;
+}
+
+.story-visual img {
+    display: block;
+
+    width: 100%;
+    max-height: 430px;
+
+    object-fit: contain;
+
+    border-radius: 17px;
+}
+
+.image-caption {
+    text-align: center;
+
+    color: #9876A8;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    padding: 12px 8px 4px;
+}
+
+
+/* =========================
+   CHAPTER CARDS
+========================= */
+
+.chapter {
+    background: white;
+
+    padding: 30px;
+    border-radius: 20px;
+
+    margin-bottom: 25px;
+
+    border-left: 6px solid #D9A6C5;
+
+    box-shadow: 0 5px 20px rgba(100, 70, 100, 0.06);
+
+    transition: 0.3s;
+}
+
+.chapter:hover {
+    transform: translateX(5px);
+}
+
+.chapter h3 {
+    color: #9876A8;
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.chapter p {
+    color: #786C75;
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   QUIZ SECTION
+========================= */
+
+.challenge-box {
+    background: linear-gradient(
+        135deg,
+        #E9D9F2,
+        #F9E4ED
+    );
+
+    padding: 40px 25px;
+
+    border-radius: 25px;
+
+    margin-top: 50px;
+
+    text-align: center;
+}
+
+.challenge-box h2 {
+    color: #9876A8;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.challenge-box h3 {
+    color: #795B85;
+    margin: 25px 0 10px;
+}
+
+.quiz-question {
+    margin-bottom: 30px;
+}
+
+.answer-btn {
+    display: inline-block;
+
+    background: white;
+    color: #786C75;
+
+    border: 2px solid #D9C3E4;
+
+    padding: 12px 22px;
+
+    border-radius: 25px;
+
+    margin: 8px;
+
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.answer-btn:hover {
+    background: #9876A8;
+    color: white;
+
+    transform: translateY(-3px);
+}
+
+.answer-btn:disabled {
+    cursor: default;
+    opacity: 0.75;
+}
+
+.quiz-feedback {
+    margin-top: 12px;
+
+    font-weight: 900;
+    font-size: 16px;
+
+    min-height: 25px;
+}
+
+.quiz-badge {
+    margin-top: 15px;
+
+    color: #795B85;
+    font-size: 19px;
+    font-weight: 900;
+
+    min-height: 30px;
+}
+
+
+/* =========================
+   THINK AND SHARE
+========================= */
+
+.think-box {
+    background: #FFF0E8;
+
+    border: 2px dashed #D9A6C5;
+
+    padding: 35px;
+
+    border-radius: 22px;
+
+    margin-top: 40px;
+
+    text-align: center;
+}
+
+.think-box h3 {
+    color: #9876A8;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.think-box p {
+    color: #786C75;
+    font-size: 17px;
+}
+
+
+/* =========================
+   BACK TO CASES
+========================= */
+
+.back-button {
+    text-align: center;
+    margin-top: 45px;
+}
+
+
+/* =========================
+   ABOUT SECTION
+========================= */
+
+#about {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+#about h2 {
+    color: #9876A8;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+#about p {
+    max-width: 700px;
+    margin: auto;
+    color: #988492;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: #E9D9EC;
+
+    text-align: center;
+
+    padding: 30px 15px;
+
+    color: #786C75;
+    font-weight: 700;
+}
+
+
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
+
+@media (max-width: 650px) {
+
+    .nav-bar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .nav-area {
+        gap: 15px;
+        font-size: 13px;
+
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .welcome-sec {
+        padding: 80px 15px;
+    }
+
+    .space-decoration {
+        opacity: 0.35;
+        right: 3%;
+        top: 70px;
+        font-size: 80px;
+    }
+
+    .chapter {
+        padding: 22px;
+    }
+
+    .section-heading {
+        font-size: 28px;
+    }
+
+    .answer-btn {
+        display: block;
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    .story-visual {
+        padding: 8px;
+        border-radius: 18px;
+    }
+
+    .story-visual img {
+        border-radius: 12px;
+    }
+
+    .think-box {
+        padding: 25px 18px;
+    }
+
+}
+
+</style>
+
+</head>
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav class="nav-bar">
+
+    <a href="#home" class="logo">
+        🚀 Space Detective
+    </a>
+
+    <ul class="nav-area">
+
+        <li><a href="#home">HOME</a></li>
+
+        <li><a href="#missions">EXPLORE CASES</a></li>
+
+        <li><a href="#about">ABOUT</a></li>
+
+    </ul>
+
+</nav>
+
+
+<!-- =========================
+     WELCOME PAGE
+========================= -->
+
+<header id="home" class="welcome-sec">
+
+    <p class="subtittle">
+        A LITTLE SPACE ADVENTURE
+    </p>
+
+    <h1>
+        Hey, Space Explorer
+    </h1>
+
+    <p class="intro">
+
+        <strong>
+
+            Somewhere among the stars,<br>
+            little machines have incredible stories to tell.
+            Are you ready to discover them?
+
+            <br><br>
+
+            <em>
+                If you are ready, let's dive deep into this rabbit hole!!
+            </em>
+
+        </strong>
+
+    </p>
+
+    <a href="#missions" class="explore-btn">
+
+        Let's Explore! 🛩️
+
+    </a>
+
+    <div class="space-decoration">
+
+        <span>🪐</span>
+
+        <span class="star">✦</span>
+
+        <span class="star">✧</span>
+
+        <span class="star">✦</span>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =========================
+     INVESTIGATION SELECTION
+========================= -->
+
+<section id="missions">
+
+    <div class="container">
+
+        <h2 class="section-heading">
+
+            Choose Your Investigation,
+            Little Detective!!
+
+        </h2>
+
+        <p class="section-description">
+
+            Every forgotten machine has its own story.
+
+            <br>
+
+            Which one would you like to investigate first?
+
+        </p>
+
+
+        <div class="case-grid">
+
+
+            <!-- CASE 001 -->
+
+            <article class="case-card">
+
+                <img
+                    src="https://science.nasa.gov/wp-content/uploads/2024/03/pia24443-crop.jpg"
+                    alt="Ingenuity helicopter attached beneath the Perseverance rover"
+                >
+
+                <div class="case-content">
+
+                    <span class="case-number">
+                        CASE 001
+                    </span>
+
+                    <h3>
+                        The Little Helicopter That Could
+                    </h3>
+
+                    <p>
+
+                        Meet Ingenuity, the little helicopter
+                        that made history on Mars. Discover its
+                        journey, incredible flights, and lasting legacy.
+
+                    </p>
+
+                    <a href="#ingenuity" class="case-link">
+
+                        Investigate this case →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- CASE 002 -->
+
+            <article class="case-card">
+
+                <div class="case-image-placeholder"
+                     style="background:linear-gradient(135deg,#E7C2AD,#A96F61,#704B61);">
+
+                    🔴
+
+                </div>
+
+                <div class="case-content">
+
+                    <span class="case-number">
+                        CASE 002
+                    </span>
+
+                    <h3>
+                        Listening to Mars's Heartbeat
+                    </h3>
+
+                    <p>
+
+                        Meet InSight, the stationary robot scientist
+                        that listened to Mars's hidden secrets
+                        and discovered what lies beneath its surface.
+
+                    </p>
+
+                    <a href="#insight" class="case-link">
+
+                        Investigate this case →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- CASE 003 -->
+
+            <article class="case-card">
+
+                <div class="case-image-placeholder"
+                     style="background:linear-gradient(135deg,#E8D2A9,#C28C70,#8D655C);">
+
+                    🤖
+
+                </div>
+
+                <div class="case-content">
+
+                    <span class="case-number">
+                        CASE 003
+                    </span>
+
+                    <h3>
+                        The Twin Detectives of Mars
+                    </h3>
+
+                    <p>
+
+                        Meet Spirit and Opportunity, two brave
+                        robotic twins who searched Mars for clues
+                        about its watery past.
+
+                    </p>
+
+                    <a href="#spirit-opportunity" class="case-link">
+
+                        Investigate this case →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     CASE 001: INGENUITY
+===================================== -->
+
+<section id="ingenuity" class="story-section">
+
+<div class="container">
+
+
+    <div class="story-header">
+
+        <span class="story-label">
+            CASE 001
+        </span>
+
+        <h2>
+            The Little Helicopter That Could
+        </h2>
+
+        <p class="story-meta">
+
+            April 19, 2021 – January 18, 2024
+
+            <br>
+
+            Location: Jezero Crater, Mars
+
+        </p>
+
+    </div>
+
+
+    <!-- CHAPTER 1 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 1: The Unexpected Passenger
+        </h3>
+
+        <p>
+
+            Meet Ingenuity, a tiny robotic helicopter
+            weighing just 1.8 kilograms.
+
+        </p>
+
+        <p>
+
+            It travelled all the way from Earth to Mars
+            tucked beneath the Perseverance rover.
+            Its mission? To prove that powered flight
+            was possible on another planet.
+
+        </p>
+
+    </article>
+
+
+    <!-- CHAPTER 2 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 2: A Flight Beyond Imagination
+        </h3>
+
+        <p>
+
+            On April 19, 2021, Ingenuity made history.
+            It became the first aircraft to achieve
+            powered, controlled flight on another planet.
+
+        </p>
+
+        <p>
+
+            During its first flight, it climbed
+            approximately 3 metres above the Martian
+            surface and remained airborne for 39.1 seconds.
+
+        </p>
+
+    </article>
+
+
+    <!-- CHAPTER 3 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 3: An Unexpected Career
+        </h3>
+
+        <p>
+
+            Ingenuity was originally designed for just
+            five experimental flights over 30 days.
+            But it had other plans!
+
+        </p>
+
+        <p>
+
+            It eventually completed 72 flights,
+            travelled approximately 17 kilometres
+            and reached a maximum altitude of 24 metres.
+
+        </p>
+
+        <p>
+
+            It also became an aerial scout, helping
+            the Perseverance team observe Martian terrain
+            from above.
+
+        </p>
+
+    </article>
+
+
+    <!-- CHAPTER 4 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 4: The Final Flight
+        </h3>
+
+        <p>
+
+            On January 18, 2024, Ingenuity completed
+            its 72nd and final flight.
+
+        </p>
+
+        <p>
+
+            During the flight, its navigation system
+            encountered difficulties, and the helicopter
+            sustained damage to its rotor blades.
+            It could no longer fly.
+
+        </p>
+
+    </article>
+
+
+    <!-- CHAPTER 5 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 5: A Legacy Beyond Mars
+        </h3>
+
+        <p>
+
+            Ingenuity's mission may have ended, but
+            its achievements changed the future of
+            planetary exploration.
+
+        </p>
+
+        <p>
+
+            It proved that powered flight was possible
+            in the thin atmosphere of Mars and showed
+            how aerial vehicles could help explore
+            other worlds.
+
+        </p>
+
+        <p>
+
+            Sometimes, even the smallest explorers
+            leave the biggest legacies.
+
+        </p>
+
+    </article>
+
+
+
+    <!-- INGENUITY QUIZ -->
+
+    <section class="challenge-box">
+
+        <h2>
+            🕵️ Detective Challenge!
+        </h2>
+
+        <p>
+            Let's see how carefully you followed Ingenuity's journey.
+        </p>
+
+
+        <div class="quiz-question">
+
+            <h3>
+                Question 1
+            </h3>
+
+            <p>
+                How many flights was Ingenuity originally designed to complete?
+            </p>
+
+            <button class="answer-btn" data-answer="wrong">
+                72 flights
+            </button>
+
+            <button class="answer-btn" data-answer="correct">
+                5 flights
+            </button>
+
+            <button class="answer-btn" data-answer="wrong">
+                100 flights
+            </button>
+
+        </div>
+
+
+        <p class="quiz-feedback"></p>
+
+        <p class="quiz-badge"></p>
+
+    </section>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================
+     CASE 002: INSIGHT
+===================================== -->
+
+<section id="insight" class="story-section">
+
+<div class="container">
+
+
+    <div class="story-header">
+
+        <span class="story-label">
+            CASE 002
+        </span>
+
+        <h2>
+            Listening to Mars's Heartbeat
+        </h2>
+
+        <p class="story-meta">
+
+            NASA's InSight Mission
+
+            <br>
+
+            Location: Elysium Planitia, Mars
+
+        </p>
+
+    </div>
+
+
+
+    <!-- INSIGHT IMAGE -->
+
+    <div class="story-visual">
+
+        <img
+            src="https://assets.science.nasa.gov/content/dam/science/psd/mars/downloadable_items/3/8/38686_Mars-InSight-Solar-Panels-Open-pia196641.jpg"
+
+            alt="NASA InSight lander with its two large solar panels opened during testing"
+
+        >
+
+        <p class="image-caption">
+
+            🔴 Meet InSight — the robot scientist designed
+            to investigate the mysteries beneath Mars.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- CHAPTER 1 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 1: A Different Kind of Explorer
+        </h3>
+
+        <p>
+
+            Most robots on Mars have wheels so they can drive
+            around and look at rocks. Not you!
+
+        </p>
+
+        <p>
+
+            Your name is InSight, and you are a stationary
+            robot scientist with three sturdy legs.
+
+        </p>
+
+        <p>
+
+            Instead of looking at the outside of Mars,
+            your job is to check Mars's "vital signs"—
+            its pulse, temperature, and reflexes—
+            to figure out what is deep inside the planet.
+
+        </p>
+
+    </article>
+
+
+
+    <!-- CHAPTER 2 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 2: Putting the Stethoscope Down
+        </h3>
+
+        <p>
+
+            You land on a wide, flat plain called
+            Elysium Planitia.
+
+        </p>
+
+        <p>
+
+            First, you open your two big round solar panels
+            like giant fans to soak up the sunshine.
+
+        </p>
+
+        <p>
+
+            Next, you use your 5-foot-long robotic arm
+            to carefully pick up a copper-colored dome
+            from your deck and set it straight onto the red ground.
+
+        </p>
+
+        <p>
+
+            Inside that dome is an ultra-sensitive seismometer—
+            a tool so good at listening that it can feel
+            vibrations smaller than the width of a single atom!
+
+        </p>
+
+    </article>
+
+
+
+    <!-- CHAPTER 3 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 3: Rumble and Whoosh!
+        </h3>
+
+        <p>
+
+            You stay completely still and listen.
+            For days, all you hear is the spooky, low whoosh
+            of Martian wind blowing past your solar panels
+            at 15 miles per hour.
+
+        </p>
+
+        <p>
+
+            Then, suddenly—rumble, shake!
+            You feel a "marsquake" rippling through the ground!
+
+        </p>
+
+        <p>
+
+            Over four years, you detect over 1,300 marsquakes,
+            including some caused by space rocks crashing into Mars.
+
+        </p>
+
+        <p>
+
+            Thanks to your careful listening, scientists learn
+            that Mars has a big liquid core and a lumpy rocky
+            mantle underneath its red crust.
+
+        </p>
+
+    </article>
+
+
+
+    <!-- INSIGHT THINK AND SHARE -->
+
+    <section class="think-box">
+
+        <h3>
+            💭 Think & Share!
+        </h3>
+
+        <p>
+
+            Put your ear against a wooden table and tap
+            the other end with your finger.
+
+        </p>
+
+        <br>
+
+        <p>
+
+            How does the sound travel differently through
+            solid wood than through the air?
+
+        </p>
+
+    </section>
+
+
+
+    <!-- INSIGHT QUIZ -->
+
+    <section class="challenge-box">
+
+        <h2>
+            🔍 InSight Detective Challenge!
+        </h2>
+
+        <p>
+            Let's test your knowledge of Mars's mysterious interior!
+        </p>
+
+
+        <div class="quiz-question">
+
+            <h3>
+                Question 1
+            </h3>
+
+            <p>
+                Was InSight designed to travel around Mars?
+            </p>
+
+            <button class="answer-btn" data-answer="wrong">
+                Yes, it had six wheels.
+            </button>
+
+            <button class="answer-btn" data-answer="correct">
+                No, it was stationary.
+            </button>
+
+            <button class="answer-btn" data-answer="wrong">
+                Yes, it could fly.
+            </button>
+
+        </div>
+
+
+        <div class="quiz-question">
+
+            <h3>
+                Question 2
+            </h3>
+
+            <p>
+                What instrument helped InSight detect marsquakes?
+            </p>
+
+            <button class="answer-btn" data-answer="wrong">
+                A telescope
+            </button>
+
+            <button class="answer-btn" data-answer="correct">
+                A seismometer
+            </button>
+
+            <button class="answer-btn" data-answer="wrong">
+                A thermometer
+            </button>
+
+        </div>
+
+
+        <p class="quiz-feedback"></p>
+
+        <p class="quiz-badge"></p>
+
+    </section>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================
+     CASE 003: SPIRIT AND OPPORTUNITY
+===================================== -->
+
+<section id="spirit-opportunity" class="story-section">
+
+<div class="container">
+
+
+    <div class="story-header">
+
+        <span class="story-label">
+            CASE 003
+        </span>
+
+        <h2>
+            The Twin Detectives of Mars
+        </h2>
+
+        <p class="story-meta">
+
+            NASA's Spirit and Opportunity Missions
+
+            <br>
+
+            January 2004 – 2018
+
+            <br>
+
+            Locations: Gusev Crater and Meridiani Planum, Mars
+
+        </p>
+
+    </div>
+
+
+
+    <!-- SPIRIT IMAGE -->
+
+    <div class="story-visual">
+
+        <img
+            src="https://science.nasa.gov/wp-content/uploads/2024/03/sol016-lander-pan-pia05117.jpg"
+
+            alt="Spirit mission landing site on the surface of Mars"
+
+        >
+
+        <p class="image-caption">
+
+            🔴 A view from the Spirit mission's landing site
+            on the Martian surface.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- CHAPTER 1 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 1: Identical Twins on Opposite Sides of a Planet
+        </h3>
+
+        <p>
+
+            Meet Spirit and Opportunity, two identical twin
+            robot geologists built by NASA.
+
+        </p>
+
+        <p>
+
+            Even though they look exactly alike—with six wheels,
+            flat solar-panel "wings," and tall camera "heads"—
+            they don't get to explore together.
+
+        </p>
+
+        <p>
+
+            In January 2004, NASA lands them on completely
+            opposite sides of Mars!
+
+        </p>
+
+        <p>
+
+            Spirit bounces down in giant airbags inside
+            Gusev Crater, which looks like an ancient lakebed.
+
+        </p>
+
+        <p>
+
+            Three weeks later, Opportunity rolls right into
+            a small crater on a flat plain called
+            Meridiani Planum.
+
+        </p>
+
+    </article>
+
+
+
+    <!-- CHAPTER 2 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 2: Hunting for Water Clues
+        </h3>
+
+        <p>
+
+            Your mission as one of the twins is to act like
+            a rock detective and search for clues that liquid
+            water once flowed on Mars.
+
+        </p>
+
+        <p>
+
+            You use your robotic arm to brush dust off strange
+            rocks and peek at them with a magnifying camera.
+
+        </p>
+
+        <p>
+
+            Almost right away, Opportunity spots tiny,
+            round gray pebbles nicknamed "blueberries"
+            scattered in the dirt—a huge clue that water
+            once soaked the ground!
+
+        </p>
+
+        <p>
+
+            Meanwhile, Spirit climbs rocky hills and finds
+            minerals that only form in hot water and steam.
+
+        </p>
+
+        <p>
+
+            Together, the twins prove that dry, dusty Mars
+            used to be a wet world long ago!
+
+        </p>
+
+    </article>
+
+
+
+    <!-- CHAPTER 3 -->
+
+    <article class="chapter">
+
+        <h3>
+            Chapter 3: The 90-Day Mission That Lasted 14 Years!
+        </h3>
+
+        <p>
+
+            Engineers originally thought the twins would
+            only survive for about three months before
+            red dust covered their solar panels and drained
+            their batteries.
+
+        </p>
+
+        <p>
+
+            Instead, helpful Martian winds sweep by like
+            giant invisible brooms, blowing dust off their
+            panels so they can keep recharging!
+
+        </p>
+
+        <p>
+
+            Spirit explores for over six years and drives
+            nearly five miles before getting stuck in soft sand.
+
+        </p>
+
+        <p>
+
+            Opportunity keeps rolling like a marathon runner,
+            traveling over 28 miles and sending back hundreds
+            of thousands of photos for more than 14 years—
+
+        </p>
+
+        <p>
+
+            Until a massive, planet-wide dust storm finally
+            darkens the sky in 2018 and puts the brave rover
+            to sleep.
+
+        </p>
+
+    </article>
+
+
+
+    <!-- SPIRIT AND OPPORTUNITY THINK AND SHARE -->
+
+    <section class="think-box">
+
+        <h3>
+            💭 Think & Share!
+        </h3>
+
+        <p>
+
+            Imagine you are one of the twin rovers on Mars
+            sending a secret message across the planet
+            to your twin.
+
+        </p>
+
+        <br>
+
+        <p>
+
+            What is the coolest discovery you would brag
+            about finding?
+
+        </p>
+
+    </section>
+
+
+
+    <!-- SPIRIT AND OPPORTUNITY QUIZ -->
+
+    <section class="challenge-box">
+
+        <h2>
+            🤖 Twin Detectives Challenge!
+        </h2>
+
+        <p>
+            Can you solve the mysteries of Spirit and Opportunity?
+        </p>
+
+
+        <div class="quiz-question">
+
+            <h3>
+                Question 1
+            </h3>
+
+            <p>
+                What were Spirit and Opportunity searching for?
+            </p>
+
+            <button class="answer-btn" data-answer="wrong">
+                Signs of alien cities
+            </button>
+
+            <button class="answer-btn" data-answer="correct">
+                Clues of ancient water
+            </button>
+
+            <button class="answer-btn" data-answer="wrong">
+                New planets
+            </button>
+
+        </div>
+
+
+        <div class="quiz-question">
+
+            <h3>
+                Question 2
+            </h3>
+
+            <p>
+                What were Opportunity's tiny round gray pebbles nicknamed?
+            </p>
+
+            <button class="answer-btn" data-answer="wrong">
+                Moon rocks
+            </button>
+
+            <button class="answer-btn" data-answer="wrong">
+                Red diamonds
+            </button>
+
+            <button class="answer-btn" data-answer="correct">
+                Blueberries
+            </button>
+
+        </div>
+
+
+        <p class="quiz-feedback"></p>
+
+        <p class="quiz-badge"></p>
+
+    </section>
+
+
+
+    <!-- BACK TO INVESTIGATIONS -->
+
+    <div class="back-button">
+
+        <a href="#missions" class="explore-btn">
+
+            ← Back to Investigations
+
+        </a>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     ABOUT SECTION
+========================= -->
+
+<section id="sources">
+
+    <h2>Mission Sources & Credits</h2>
+
+    <p>
+        The mission information and photographs used
+        in Space Detective are based on NASA resources.
+    </p>
+
+    <h3>Official Mission Resources</h3>
+
+    <ul>
+        <li>
+            <a href="https://www.jpl.nasa.gov/missions/ingenuity/"
+               target="_blank">
+                NASA — Ingenuity Mars Helicopter
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.jpl.nasa.gov/missions/mars-exploration-rover-opportunity-mer/"
+               target="_blank">
+                NASA — Opportunity Rover
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.jpl.nasa.gov/missions/insight/"
+               target="_blank">
+                NASA — InSight Lander
+            </a>
+        </li>
+        <li>
+            <a href="https://nssdc.gsfc.nasa.gov/planetary/chronology_mars.html"
+            target="_blank">
+              NASA NSSDCA — Mars Exploration Timeline
+            </a>
+        </li>
+    </ul>
+
+    <h3>Image Sources</h3>
+
+    <ul>
+        <li>
+            <a href="https://science.nasa.gov/wp-content/uploads/2024/03/pia24443-crop.jpg"
+               target="_blank">
+                Ingenuity — NASA image
+            </a>
+        </li>
+
+        <li>
+            <a href="https://science.nasa.gov/wp-content/uploads/2024/03/sol016-lander-pan-pia05117.jpg"
+               target="_blank">
+                Spirit landing site — NASA image
+            </a>
+        </li>
+
+        <li>
+            <a href="https://assets.science.nasa.gov/content/dam/science/psd/mars/downloadable_items/3/8/38686_Mars-InSight-Solar-Panels-Open-pia196641.jpg"
+               target="_blank">
+                InSight — NASA image
+            </a>
+        </li>
+    </ul>
+
+</section>
+<section id="about">
+
+    <h2>
+        About Space Detective 🚀
+    </h2>
+
+    <p>
+
+        Welcome to Space Detective, where curious little explorers
+        discover the incredible stories of machines that travelled
+        beyond Earth.
+
+        Every mission is a new mystery.
+        Every discovery is another adventure!
+
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        ✦ Space Detective ✦
+    </p>
+
+    <p>
+        Exploring the universe, one story at a time. 🚀
+    </p>
+
+</footer>
+<script>
+
+/* =====================================
+   SPACE DETECTIVE QUIZ SYSTEM
+===================================== */
+
+
+const allQuizzes = document.querySelectorAll(
+    '.challenge-box'
+);
+
+
+allQuizzes.forEach((quiz, quizIndex) => {
+
+    const questions = quiz.querySelectorAll(
+        '.quiz-question'
+    );
+
+    const feedback = quiz.querySelector(
+        '.quiz-feedback'
+    );
+
+    const badge = quiz.querySelector(
+        '.quiz-badge'
+    );
+
+
+    let completedQuestions = new Set();
+
+
+    const badgeNames = [
+        "🏅 Ingenuity Flight Detective Badge Unlocked!",
+
+        "🔬 InSight Science Detective Badge Unlocked!",
+
+        "🤖 Mars Twin Detective Badge Unlocked!"
+    ];
+
+
+    questions.forEach((question, questionIndex) => {
+
+        const buttons = question.querySelectorAll(
+            '.answer-btn'
+        );
+
+
+        buttons.forEach(button => {
+
+            button.addEventListener('click', () => {
+
+
+                /* PREVENT REPEATED ANSWERS */
+
+                if (completedQuestions.has(questionIndex)) {
+                    return;
+                }
+
+
+                /* CORRECT ANSWER */
+
+                if (button.dataset.answer === 'correct') {
+
+                    completedQuestions.add(questionIndex);
+
+                    feedback.textContent =
+                        "CORRECT! Excellent detective work! 🎉";
+
+                    feedback.style.color = "green";
+
+
+                    /* LOCK ANSWERS FOR THIS QUESTION */
+
+                    buttons.forEach(btn => {
+
+                        btn.disabled = true;
+
+                    });
+
+
+                    /* CHECK COMPLETION */
+
+                    if (completedQuestions.size === questions.length) {
+
+                        badge.textContent =
+                            badgeNames[quizIndex];
+
+                        feedback.textContent =
+                            "AMAZING! You solved every mystery! 🌟";
+
+                    }
+
+                }
+
+
+                /* WRONG ANSWER */
+
+                else {
+
+                    feedback.textContent =
+                        "NOT QUITE! Try again, little detective! 🔍";
+
+                    feedback.style.color = "red";
+
+                }
+
+            });
+
+        });
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
